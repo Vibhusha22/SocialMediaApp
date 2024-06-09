@@ -2,10 +2,28 @@
   display:flex;
 }
 .bar{
-  height:785px;
+  height:800px;
 }
 .Main{
   width:100%;
+}
+.classList{
+  margin:35px;
+}
+
+.createContainer{
+  margin:30px;
+  width:80%;
+}
+.deleteButton{
+  font-size: x-large;
+  color:rgb(193, 8, 8);
+}
+.bottomContainer{
+  display:flex;
+  justify-content: space-between;
+  margin:8px;
+  align-items: center;
 }
 
 

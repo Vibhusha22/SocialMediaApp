@@ -10,9 +10,9 @@ function Sidebar({ currTab, setCurrTab }) {
           className="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
         >
           <svg className="bi pe-none me-2" width="40" height="32">
-            <use xlink:href="#bootstrap"></use>
+            <use xlinkHref="#bootstrap"></use>
           </svg>
-          <span className="fs-4">AppName</span>
+          <span className="fs-4">BlogWheel</span>
         </a>
         <hr />
         <ul className="nav nav-pills flex-column mb-auto">
@@ -28,7 +28,7 @@ function Sidebar({ currTab, setCurrTab }) {
               aria-current="page"
             >
               <svg className="bi pe-none me-2" width="16" height="16">
-                <use xlink:href="#home"></use>
+                <use xlinkHref="#home"></use>
               </svg>
               Home
             </a>
@@ -58,14 +58,14 @@ function Sidebar({ currTab, setCurrTab }) {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            <img
+            {/* <img
               src="https://github.com/mdo.png"
               alt=""
               width="32"
               height="32"
               className="rounded-circle me-2"
-            />
-            <strong>mdo</strong>
+            /> */}
+            <strong>Vibhusha</strong>
           </a>
           <ul className="dropdown-menu dropdown-menu-dark text-small shadow">
             <li>
