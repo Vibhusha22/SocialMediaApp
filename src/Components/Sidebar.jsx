@@ -1,4 +1,5 @@
-function Sidebar({ currTab, setCurrTab }) {
+import { Link } from "react-router-dom";
+function Sidebar() {
   return (
     <>
       <div
@@ -17,37 +18,20 @@ function Sidebar({ currTab, setCurrTab }) {
         <hr />
         <ul className="nav nav-pills flex-column mb-auto">
           <li className="nav-item">
-            <a
-              onClick={() => {
-                setCurrTab("Home");
-              }}
-              href="#"
-              className={`nav-link text-white ${
-                currTab === "Home" && "active"
-              }`}
-              aria-current="page"
-            >
+            <Link to="/" className="nav-link text-white" aria-current="page">
               <svg className="bi pe-none me-2" width="16" height="16">
                 <use xlinkHref="#home"></use>
               </svg>
               Home
-            </a>
+            </Link>
           </li>
           <li>
-            <a
-              onClick={() => {
-                setCurrTab("Create");
-              }}
-              href="#"
-              className={`nav-link text-white ${
-                currTab === "Create" && "active"
-              }`}
-            >
+            <Link to="/Create-Post" className="nav-link text-white">
               <svg className="bi pe-none me-2" width="16" height="16">
                 <use xlinkHref="#speedometer2" />
               </svg>
               Create
-            </a>
+            </Link>
           </li>
         </ul>
         <hr />
@@ -58,13 +42,6 @@ function Sidebar({ currTab, setCurrTab }) {
             data-bs-toggle="dropdown"
             aria-expanded="false"
           >
-            {/* <img
-              src="https://github.com/mdo.png"
-              alt=""
-              width="32"
-              height="32"
-              className="rounded-circle me-2"
-            /> */}
             <strong>Vibhusha</strong>
           </a>
           <ul className="dropdown-menu dropdown-menu-dark text-small shadow">

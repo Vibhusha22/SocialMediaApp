@@ -1,7 +1,10 @@
 import { useRef, useContext } from "react";
 import { PostStore } from "../store/PostStore";
+import { useNavigate } from "react-router-dom";
 
 function CreatePost() {
+  const navigate = useNavigate();
+
   const titleRef = useRef();
   const bodyRef = useRef();
   const hashtagsRef = useRef();
@@ -28,6 +31,8 @@ function CreatePost() {
     hashtagsRef.current.value = "";
     likesRef.current.value = "";
     userIDRef.current.value = "";
+
+    navigate("/");
   };
 
   return (

@@ -2,10 +2,9 @@ import "./App.css";
 import Header from "./Components/Header";
 import Sidebar from "./Components/Sidebar";
 import Footer from "./Components/Footer";
-import CreatePost from "./Components/CreatePost";
-import PostList from "./Components/PostList";
 import { useState } from "react";
 import PostListProvider from "./store/PostStore";
+import { Outlet } from "react-router-dom";
 
 function App() {
   const [currTab, setCurrTab] = useState("Home");
@@ -15,11 +14,7 @@ function App() {
         <Sidebar currTab={currTab} setCurrTab={setCurrTab}></Sidebar>
         <div className="Main">
           <Header></Header>
-          {currTab === "Home" ? (
-            <PostList></PostList>
-          ) : (
-            <CreatePost></CreatePost>
-          )}
+          <Outlet />
           <Footer></Footer>
         </div>
       </div>

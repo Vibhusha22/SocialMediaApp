@@ -5,6 +5,7 @@ import DefaultMessage from "./DefaultMessage";
 import LoadingSpinner from "./LoadingSpinner";
 
 function PostList() {
+  //const data = useLoader();
   const { postList } = useContext(PostStore);
   const { fetching } = useContext(PostStore);
 
@@ -19,5 +20,6 @@ function PostList() {
     </>
   );
 }
-
+//loader func useLoader to fetch data directly here
+//export const loader = () => //fetch
 export default PostList;
