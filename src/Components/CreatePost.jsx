@@ -10,13 +10,19 @@ function CreatePost() {
   const { addPost } = useContext(PostStore);
 
   const handleAddClick = () => {
-    addPost(
-      titleRef.current.value,
-      bodyRef.current.value,
-      hashtagsRef.current.value.split(/\s+/),
-      likesRef.current.value,
-      userIDRef.current.value
-    );
+    fetch("https://dummyjson.com/posts/add", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        title: titleRef.current.value,
+        body: bodyRef.current.value,
+        reactions: likesRef.current.value,
+        userId: userIDRef.current.value,
+        tags: hashtagsRef.current.value.split(/\s+/),
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => addPost(data));
     titleRef.current.value = "";
     bodyRef.current.value = "";
     hashtagsRef.current.value = "";

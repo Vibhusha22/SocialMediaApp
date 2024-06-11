@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext } from "react";
 import { PostStore } from "../store/PostStore";
 import Post from "./Post";
 import DefaultMessage from "./DefaultMessage";
@@ -6,24 +6,7 @@ import LoadingSpinner from "./LoadingSpinner";
 
 function PostList() {
   const { postList } = useContext(PostStore);
-  const { addPosts } = useContext(PostStore);
-  const [fetching, setFetching] = useState();
-
-  useEffect(() => {
-    const controller = new AbortController();
-    const signal = controller.signal;
-    setFetching(true);
-    fetch("https://dummyjson.com/posts", { signal })
-      .then((res) => res.json())
-      .then((data) => {
-        addPosts(data.posts);
-        setFetching(false);
-      });
-    return () => {
-      console.log("cleaning useEffect");
-      controller.abort();
-    };
-  }, []);
+  const { fetching } = useContext(PostStore);
 
   return (
     <>

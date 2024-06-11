@@ -1,4 +1,4 @@
-import { createContext, useReducer } from "react";
+import { createContext, useReducer, useState, useEffect } from "react";
 export const PostStore = createContext({
   postList: [],
   addPost: () => {},
@@ -8,16 +8,7 @@ export const PostStore = createContext({
 const handleActionReducer = (postList, action) => {
   let newPostList = postList;
   if (action.type === "ADD_POST") {
-    newPostList = [
-      {
-        title: action.payload.title,
-        body: action.payload.body,
-        tags: action.payload.hashTags,
-        likes: action.payload.likes,
-        user_ID: Date.now(),
-      },
-      ...postList,
-    ];
+    newPostList = [action.payload, ...postList];
   } else if (action.type === "DELETE_POST") {
     newPostList = postList.filter(
       (item) => action.payload.deleteid !== item.id
@@ -58,10 +49,10 @@ const PostListProvider = ({ children }) => {
 
   const [postList, DispatchList] = useReducer(handleActionReducer, []);
 
-  const addPost = (title, body, hashTags, likes, userID) => {
+  const addPost = (post) => {
     let newDispatch = {
       type: "ADD_POST",
-      payload: { title, body, hashTags, likes, userID },
+      payload: post,
     };
     return DispatchList(newDispatch);
   };
@@ -81,9 +72,28 @@ const PostListProvider = ({ children }) => {
     };
     return DispatchList(newDispatch);
   };
+
+  const [fetching, setFetching] = useState();
+
+  useEffect(() => {
+    const controller = new AbortController();
+    const signal = controller.signal;
+    setFetching(true);
+    fetch("https://dummyjson.com/posts", { signal })
+      .then((res) => res.json())
+      .then((data) => {
+        addPosts(data.posts);
+        setFetching(false);
+      });
+    return () => {
+      console.log("cleaning useEffect");
+      controller.abort();
+    };
+  }, []);
+
   return (
     <>
-      <PostStore.Provider value={{ postList, addPost, deletePost, addPosts }}>
+      <PostStore.Provider value={{ postList, addPost, deletePost, fetching }}>
         {children}
       </PostStore.Provider>
     </>
