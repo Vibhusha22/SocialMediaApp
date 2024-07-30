@@ -1,10 +1,11 @@
 import React from "react";
-import { AiFillLike } from "react-icons/ai";
+import { AiFillLike, AiFillDislike } from "react-icons/ai";
 import { RiDeleteBin4Fill } from "react-icons/ri";
 import { useContext } from "react";
 import { PostStore } from "../store/PostStore";
 
 function Post({ post }) {
+  if (!post) return null;
   const { deletePost } = useContext(PostStore);
   const handleDeletePost = () => {
     deletePost(post.id);
@@ -22,14 +23,22 @@ function Post({ post }) {
           ))}
         </div>
         <div className="bottomContainer">
-          <a href="#" className="btn btn-primary" style={{ margin: "5px" }}>
-            <AiFillLike />
-            {post.likes}
-          </a>
-          <RiDeleteBin4Fill
-            className="deleteButton"
-            onClick={handleDeletePost}
-          />
+          <div>
+            <a href="#" className="btn-like">
+              <AiFillLike style={{ marginRight: "5px" }} />
+              {post.reactions.likes}
+            </a>
+            <a href="#" className="btn-dislike">
+              <AiFillDislike style={{ marginRight: "5px" }} />
+              {post.reactions.dislikes}
+            </a>
+          </div>
+          <div>
+            <RiDeleteBin4Fill
+              className="deleteButton"
+              onClick={handleDeletePost}
+            />
+          </div>
         </div>
       </div>
     </div>

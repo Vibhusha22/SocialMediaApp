@@ -9,6 +9,7 @@ function CreatePost() {
   const bodyRef = useRef();
   const hashtagsRef = useRef();
   const likesRef = useRef();
+  const dislikesRef = useRef();
   const userIDRef = useRef();
   const { addPost } = useContext(PostStore);
 
@@ -19,8 +20,11 @@ function CreatePost() {
       body: JSON.stringify({
         title: titleRef.current.value,
         body: bodyRef.current.value,
-        reactions: likesRef.current.value,
-        userId: userIDRef.current.value,
+        reactions: {
+          likes: parseInt(likesRef.current.value),
+          dislikes: parseInt(dislikesRef.current.value),
+        },
+        userId: parseInt(userIDRef.current.value),
         tags: hashtagsRef.current.value.split(/\s+/),
       }),
     })
@@ -30,6 +34,7 @@ function CreatePost() {
     bodyRef.current.value = "";
     hashtagsRef.current.value = "";
     likesRef.current.value = "";
+    dislikesRef.current.value = "";
     userIDRef.current.value = "";
 
     navigate("/");
@@ -39,38 +44,38 @@ function CreatePost() {
     <>
       <div className="createContainer">
         <div className="mb-3">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
+          <label htmlFor="userID" className="form-label">
             User ID
           </label>
           <input
             type="text"
             className="form-control"
-            id="exampleFormControlInput1"
+            id="userID"
             ref={userIDRef}
             placeholder="Enter ID"
           />
         </div>
 
         <div className="mb-3">
-          <label htmlFor="exampleFormControlInput1" className="form-label">
+          <label htmlFor="title" className="form-label">
             Title
           </label>
           <input
             type="text"
             className="form-control"
-            id="exampleFormControlInput1"
+            id="title"
             ref={titleRef}
             placeholder="Enter title"
           />
         </div>
 
         <div className="mb-3">
-          <label htmlFor="exampleFormControlTextarea1" className="form-label">
+          <label htmlFor="body" className="form-label">
             Content
           </label>
           <textarea
             className="form-control"
-            id="exampleFormControlTextarea1"
+            id="body"
             ref={bodyRef}
             placeholder="What's on your mind?"
             rows="3"
@@ -78,30 +83,41 @@ function CreatePost() {
         </div>
 
         <div className="mb-3">
-          <label
-            htmlFor="exampleFormControlInput1"
-            className="form-label"
-          ></label>
+          <label htmlFor="hashtags" className="form-label">
+            Hashtags
+          </label>
           <input
-            type="email"
+            type="text"
             className="form-control"
-            id="exampleFormControlInput1"
+            id="hashtags"
             placeholder="Add Hashtags using space"
             ref={hashtagsRef}
           />
         </div>
 
         <div className="mb-3">
-          <label
-            htmlFor="exampleFormControlInput1"
-            className="form-label"
-          ></label>
+          <label htmlFor="likes" className="form-label">
+            Likes
+          </label>
           <input
-            type="email"
+            type="number"
             className="form-control"
-            id="exampleFormControlInput1"
-            placeholder="Add Reactions"
+            id="likes"
+            placeholder="Add Likes"
             ref={likesRef}
+          />
+        </div>
+
+        <div className="mb-3">
+          <label htmlFor="dislikes" className="form-label">
+            Dislikes
+          </label>
+          <input
+            type="number"
+            className="form-control"
+            id="dislikes"
+            placeholder="Add Dislikes"
+            ref={dislikesRef}
           />
         </div>
 
